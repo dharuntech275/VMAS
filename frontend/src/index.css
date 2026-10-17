@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
+  --color-banana: #14452F;
+  --color-banana-hover: #0E3523;
+  --color-banana-light: #1D5E40;
+  --color-turmeric: #F2B705;
+  --color-turmeric-hover: #DCA502;
+  --color-offwhite: #FBFBFA;
+  --color-dark-bg: #0D1612;
+  --color-dark-surface: #14211B;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+}
+
+/* Accessibility: Consistent, high-visibility keyboard focus rings */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #F2B705 !important;
+  outline-offset: 2px !important;
+}

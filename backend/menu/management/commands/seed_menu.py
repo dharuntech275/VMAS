@@ -1,0 +1,87 @@
+from decimal import Decimal
+from django.core.management.base import BaseCommand
+from menu.models import MenuItem
+
+
+class Command(BaseCommand):
+    help = 'Seeds initial ready-made food pack items into the database'
+
+    def handle(self, *args, **options):
+        items = [
+            {
+                'name': 'Chapathi',
+                'slug': 'chapathi-pack-of-5',
+                'pack_size': 'Pack of 5',
+                'price': Decimal('50.00'),
+                'description': 'Soft and freshly rolled whole wheat chapathis, cooked to perfection and hygienically packed.',
+                'image': 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&auto=format&fit=crop&q=80',
+                'is_available': True,
+            },
+            {
+                'name': 'Wheat parotta',
+                'slug': 'wheat-parotta-pack-of-4',
+                'pack_size': 'Pack of 4',
+                'price': Decimal('60.00'),
+                'description': 'Crispy yet soft layered parottas crafted with healthy 100% whole wheat flour.',
+                'image': 'https://images.unsplash.com/photo-1626074353765-517a681e40be?w=600&auto=format&fit=crop&q=80',
+                'is_available': True,
+            },
+            {
+                'name': 'Plain naan',
+                'slug': 'plain-naan-pack-of-4',
+                'pack_size': 'Pack of 4',
+                'price': Decimal('80.00'),
+                'description': 'Traditional clay-oven style soft and fluffy tandoori naans, ideal with rich curries.',
+                'image': 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&auto=format&fit=crop&q=80',
+                'is_available': True,
+            },
+            {
+                'name': 'Butter naan',
+                'slug': 'butter-naan-pack-of-4',
+                'pack_size': 'Pack of 4',
+                'price': Decimal('100.00'),
+                'description': 'Tender tandoor-baked naans generously brushed with pure aromatic butter.',
+                'image': 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&auto=format&fit=crop&q=80',
+                'is_available': True,
+            },
+            {
+                'name': 'Phulka',
+                'slug': 'phulka-pack-of-6',
+                'pack_size': 'Pack of 6',
+                'price': Decimal('45.00'),
+                'description': 'Light, oil-free whole wheat rotis puffed directly over open flame. Healthy and easy to digest.',
+                'image': 'https://images.unsplash.com/photo-1541518763669-27fef04b14ea?w=600&auto=format&fit=crop&q=80',
+                'is_available': True,
+            },
+            {
+                'name': 'Poori',
+                'slug': 'poori-pack-of-6',
+                'pack_size': 'Pack of 6',
+                'price': Decimal('60.00'),
+                'description': 'Golden, crisp and puffed pooris prepared fresh in high-grade cooking oil.',
+                'image': 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&auto=format&fit=crop&q=80',
+                'is_available': True,
+            },
+        ]
+
+        created_count = 0
+        updated_count = 0
+
+        for item_data in items:
+            slug = item_data['slug']
+            obj, created = MenuItem.objects.update_or_create(
+                slug=slug,
+                defaults=item_data
+            )
+            if created:
+                created_count += 1
+                self.stdout.write(self.style.SUCCESS(f"  + Added: {obj.name} ({obj.pack_size}) - Rs. {obj.price}"))
+            else:
+                updated_count += 1
+                self.stdout.write(self.style.WARNING(f"  * Updated: {obj.name} ({obj.pack_size}) - Rs. {obj.price}"))
+
+        self.stdout.write(
+            self.style.SUCCESS(
+                f"\nMenu seeding finished: {created_count} created, {updated_count} updated."
+            )
+        )

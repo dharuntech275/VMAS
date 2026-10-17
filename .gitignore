@@ -1,0 +1,32 @@
+# Environments & Secrets
+.env
+.env.*
+!.env.example
+*.env
+
+# Python Virtual Environments
+venv/
+env/
+ENV/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Node & Frontend Builds
+node_modules/
+dist/
+dist-ssr/
+
+# SQLite Databases & Logs
+*.sqlite3
+*.sqlite3-journal
+*.log
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
