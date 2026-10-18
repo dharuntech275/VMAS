@@ -244,7 +244,7 @@ def generate_pdf():
     story.append(Paragraph(
         "<b>VMAS (VMA Services)</b> is an on-demand food delivery platform inspired by modern ordering apps (Swiggy/Zomato), "
         "designed specifically for freshly made, ready-to-eat bread packs rather than full restaurant meals. "
-        "VMAS sells wholesome staple foods (Chapathi, Wheat Parotta, Plain Naan, Butter Naan, Phulka, and Poori) "
+        "VMAS sells wholesome staple foods (Chapathi, Wheat Parotta, Plain Naan, and Poori) "
         "packaged exclusively in multi-piece family portions (e.g., Pack of 5, Pack of 4).",
         body_style
     ))

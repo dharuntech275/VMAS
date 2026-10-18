@@ -214,4 +214,23 @@ Step-by-step implementation log detailing every milestone, file created/modified
   git push origin main
   ```
 
+---
+
+## Step 10: Menu Optimization - Removed Phulka and Butter Naan
+* **Date:** 2026-10-18
+* **Summary:** Streamlined the menu catalog by removing Phulka and Butter Naan, standardizing the offerings around the 4 staple bread packs (Chapathi, Wheat Parotta, Plain Naan, and Poori). Updated `seed_menu.py` management command and removed records and associated test references from the database. Updated promotional copy in `Home.jsx` and project documentation in `generate_pdf.py`. Verified that `GET /api/menu/` returns only the 4 active items and that all 8 automated unit tests pass.
+* **Files Created / Modified:**
+  - `vmas/backend/menu/management/commands/seed_menu.py`
+  - `vmas/frontend/src/pages/Home.jsx`
+  - `vmas/docs/generate_pdf.py`
+  - `vmas/docs/CHANGELOG.md`
+  - `vmas/docs/VMAS_Documentation.pdf`
+* **Run Commands:**
+  ```cmd
+  python backend/manage.py test
+  python docs/generate_pdf.py
+  git push origin main
+  ```
+
+
 

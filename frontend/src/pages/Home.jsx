@@ -50,7 +50,7 @@ export default function Home() {
           </h1>
 
           <p className="text-base sm:text-lg text-emerald-100/90 leading-relaxed">
-            Freshly prepared ready-made food packs of Chapathi, Wheat Parotta, Butter Naan, and Poori.
+            Freshly prepared ready-made food packs of Chapathi, Wheat Parotta, Plain Naan, and Poori.
             Cooked fresh upon your order and delivered in family-friendly portions.
           </p>
 
