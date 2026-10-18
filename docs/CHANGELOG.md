@@ -192,3 +192,26 @@ Step-by-step implementation log detailing every milestone, file created/modified
   python docs/generate_pdf.py
   ```
 
+---
+
+## Step 9: Authentic Menu Assets for Poori, Plain Naan, and Wheat Parotta
+* **Date:** 2026-10-18
+* **Summary:** Integrated authentic client-provided food imagery for Poori (puffed golden pooris on wooden plate), Plain Naan (tandoor-baked herb-buttered naans), and Wheat Parotta (golden spiral layered wheat parottas). Placed high-resolution images in `frontend/public/images/` (`poori.jpg`, `plain_naan.jpg`, `wheat_parotta.jpg`) and mirrored in `frontend/src/assets/`. Updated `seed_menu.py` with relative asset paths and executed database synchronization. Verified all four food pack items return HTTP 200 on port 3000 and live DRF `/api/menu/` endpoint.
+* **Files Created / Modified:**
+  - `vmas/frontend/public/images/poori.jpg`
+  - `vmas/frontend/public/images/plain_naan.jpg`
+  - `vmas/frontend/public/images/wheat_parotta.jpg`
+  - `vmas/frontend/src/assets/poori.jpg`
+  - `vmas/frontend/src/assets/plain_naan.jpg`
+  - `vmas/frontend/src/assets/wheat_parotta.jpg`
+  - `vmas/backend/menu/management/commands/seed_menu.py`
+  - `vmas/docs/CHANGELOG.md`
+  - `vmas/docs/VMAS_Documentation.pdf`
+* **Run Commands:**
+  ```cmd
+  python backend/manage.py seed_menu
+  python docs/generate_pdf.py
+  git push origin main
+  ```
+
+

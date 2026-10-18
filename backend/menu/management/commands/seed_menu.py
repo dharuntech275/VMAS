@@ -23,7 +23,7 @@ class Command(BaseCommand):
                 'pack_size': 'Pack of 4',
                 'price': Decimal('60.00'),
                 'description': 'Crispy yet soft layered parottas crafted with healthy 100% whole wheat flour.',
-                'image': 'https://images.unsplash.com/photo-1626074353765-517a681e40be?w=600&auto=format&fit=crop&q=80',
+                'image': '/images/wheat_parotta.jpg',
                 'is_available': True,
             },
             {
@@ -32,7 +32,7 @@ class Command(BaseCommand):
                 'pack_size': 'Pack of 4',
                 'price': Decimal('80.00'),
                 'description': 'Traditional clay-oven style soft and fluffy tandoori naans, ideal with rich curries.',
-                'image': 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&auto=format&fit=crop&q=80',
+                'image': '/images/plain_naan.jpg',
                 'is_available': True,
             },
             {
@@ -59,7 +59,7 @@ class Command(BaseCommand):
                 'pack_size': 'Pack of 6',
                 'price': Decimal('60.00'),
                 'description': 'Golden, crisp and puffed pooris prepared fresh in high-grade cooking oil.',
-                'image': 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&auto=format&fit=crop&q=80',
+                'image': '/images/poori.jpg',
                 'is_available': True,
             },
         ]
