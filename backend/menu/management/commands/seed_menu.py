@@ -14,7 +14,7 @@ class Command(BaseCommand):
                 'pack_size': 'Pack of 5',
                 'price': Decimal('50.00'),
                 'description': 'Soft and freshly rolled whole wheat chapathis, cooked to perfection and hygienically packed.',
-                'image': 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&auto=format&fit=crop&q=80',
+                'image': '/images/chapathi.jpg',
                 'is_available': True,
             },
             {

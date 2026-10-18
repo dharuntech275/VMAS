@@ -1,9 +1,23 @@
+from django import forms
 from django.contrib import admin
 from .models import MenuItem
 
 
+class MenuItemAdminForm(forms.ModelForm):
+    image = forms.CharField(
+        max_length=500,
+        required=False,
+        help_text="Direct web image URL (e.g. Unsplash, CDN link) or relative asset path (e.g. /images/chapathi.jpg)."
+    )
+
+    class Meta:
+        model = MenuItem
+        fields = '__all__'
+
+
 @admin.register(MenuItem)
 class MenuItemAdmin(admin.ModelAdmin):
+    form = MenuItemAdminForm
     list_display = ('name', 'pack_size', 'price', 'is_available', 'created_at')
     list_filter = ('is_available', 'created_at')
     search_fields = ('name', 'description', 'pack_size')

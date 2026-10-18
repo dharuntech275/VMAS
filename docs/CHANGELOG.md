@@ -172,3 +172,23 @@ Step-by-step implementation log detailing every milestone, file created/modified
   git init
   git remote add origin https://github.com/dharuntech275/vmas.git
   ```
+
+---
+
+## Step 8: Menu Asset Customization - Authentic Chapathi Image Integration
+* **Date:** 2026-10-18
+* **Summary:** Replaced placeholder Chapathi menu item image with authentic freshly-made golden wheat chapathis stack image uploaded by client. Saved high-resolution asset to `frontend/public/images/chapathi.jpg` and `frontend/src/assets/chapathi.jpg`. Updated database record and `seed_menu.py` command with relative asset path `/images/chapathi.jpg`. Updated `MenuItemAdminForm` in `backend/menu/admin.py` and `MenuItemSerializer` in `backend/menu/serializers.py` to seamlessly accept local asset paths alongside external CDN URLs. Verified HTTP 200 asset delivery on Vite frontend dev server and live DRF `/api/menu/` endpoint.
+* **Files Created / Modified:**
+  - `vmas/frontend/public/images/chapathi.jpg`
+  - `vmas/frontend/src/assets/chapathi.jpg`
+  - `vmas/backend/menu/management/commands/seed_menu.py`
+  - `vmas/backend/menu/admin.py`
+  - `vmas/backend/menu/serializers.py`
+  - `vmas/docs/CHANGELOG.md`
+  - `vmas/docs/VMAS_Documentation.pdf`
+* **Run Commands:**
+  ```cmd
+  python backend/manage.py seed_menu
+  python docs/generate_pdf.py
+  ```
+

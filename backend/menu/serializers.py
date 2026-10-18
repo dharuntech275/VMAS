@@ -6,6 +6,8 @@ class MenuItemSerializer(serializers.ModelSerializer):
     """
     Serializer for displaying available menu items.
     """
+    image = serializers.CharField(required=False, allow_null=True, allow_blank=True)
+
     class Meta:
         model = MenuItem
         fields = [
