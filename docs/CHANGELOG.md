@@ -232,5 +232,26 @@ Step-by-step implementation log detailing every milestone, file created/modified
   git push origin main
   ```
 
+---
+
+## Step 11: Menu Expansion - Added Bajra Chapathi and Chola Poori
+* **Date:** 2026-10-20
+* **Summary:** Expanded the VMAS menu offerings with two new items: Bajra Chapathi (Pack of 5, ₹60.00, wholesome pearl millet flatbread) and Chola Poori (Pack of 3, ₹75.00, large fluffy golden bhatura-style pooris). Placed high-resolution studio imagery into `frontend/public/images/` (`bajra_chapathi.jpg`, `chola_poori.jpg`) and mirrored to `frontend/src/assets/`. Updated `seed_menu.py` management command and synchronized database records. Verified HTTP 200 image serving on port 3000 and live DRF `/api/menu/` payload with 6 total menu items. Regenerated PDF documentation.
+* **Files Created / Modified:**
+  - `vmas/frontend/public/images/bajra_chapathi.jpg`
+  - `vmas/frontend/public/images/chola_poori.jpg`
+  - `vmas/frontend/src/assets/bajra_chapathi.jpg`
+  - `vmas/frontend/src/assets/chola_poori.jpg`
+  - `vmas/backend/menu/management/commands/seed_menu.py`
+  - `vmas/docs/CHANGELOG.md`
+  - `vmas/docs/VMAS_Documentation.pdf`
+* **Run Commands:**
+  ```cmd
+  python backend/manage.py seed_menu
+  python docs/generate_pdf.py
+  git push origin main
+  ```
+
+
 
 

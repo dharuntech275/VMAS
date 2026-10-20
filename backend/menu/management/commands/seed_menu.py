@@ -44,6 +44,24 @@ class Command(BaseCommand):
                 'image': '/images/poori.jpg',
                 'is_available': True,
             },
+            {
+                'name': 'Bajra chapathi',
+                'slug': 'bajra-chapathi-pack-of-5',
+                'pack_size': 'Pack of 5',
+                'price': Decimal('60.00'),
+                'description': 'Nutritious gluten-free pearl millet rotis, freshly made on traditional tawa. Rich in fiber and iron.',
+                'image': '/images/bajra_chapathi.jpg',
+                'is_available': True,
+            },
+            {
+                'name': 'Chola poori',
+                'slug': 'chola-poori-pack-of-3',
+                'pack_size': 'Pack of 3',
+                'price': Decimal('75.00'),
+                'description': 'Extra-large fluffy and golden bhatura-style pooris, fried crisp on the outside and soft inside.',
+                'image': '/images/chola_poori.jpg',
+                'is_available': True,
+            },
         ]
 
         created_count = 0
