@@ -71,6 +71,33 @@ class Command(BaseCommand):
                 'image': '/images/maida_parotta.jpg',
                 'is_available': True,
             },
+            {
+                'name': 'Mudakathan keerai chapathi',
+                'slug': 'mudakathan-keerai-chapathi-pack-of-5',
+                'pack_size': 'Pack of 5',
+                'price': Decimal('65.00'),
+                'description': 'Traditional herbal chapathis infused with fresh medicinal Mudakathan keerai. Renowned for joint health and wellness.',
+                'image': '/images/mudakathan_keerai_chapathi.jpg',
+                'is_available': True,
+            },
+            {
+                'name': 'Methi chapathi',
+                'slug': 'methi-chapathi-pack-of-5',
+                'pack_size': 'Pack of 5',
+                'price': Decimal('60.00'),
+                'description': 'Flavorful soft chapathis blended with fresh aromatic fenugreek (methi) leaves and mild traditional spices.',
+                'image': '/images/methi_chapathi.jpg',
+                'is_available': True,
+            },
+            {
+                'name': 'Ragi chapathi',
+                'slug': 'ragi-chapathi-pack-of-5',
+                'pack_size': 'Pack of 5',
+                'price': Decimal('60.00'),
+                'description': '100% wholesome finger millet (Ragi) flatbreads, packed with calcium, fiber, and natural goodness.',
+                'image': '/images/ragi_chapathi.jpg',
+                'is_available': True,
+            },
         ]
 
         created_count = 0

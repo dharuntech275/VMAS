@@ -270,6 +270,34 @@ Step-by-step implementation log detailing every milestone, file created/modified
   git push origin main
   ```
 
+---
+
+## Step 13: Specialty Millet & Herbal Expansion - Added Mudakathan Keerai, Methi, and Ragi Chapathi
+* **Date:** 2026-10-20
+* **Summary:** Expanded the traditional specialty bread line-up with three nutritious varieties:
+  1. **Mudakathan Keerai Chapathi (Pack of 5, ₹65.00)** — herbal chapathis infused with medicinal balloon vine greens for joint vitality.
+  2. **Methi Chapathi (Pack of 5, ₹60.00)** — flavorful soft rotis blended with fresh aromatic fenugreek leaves.
+  3. **Ragi Chapathi (Pack of 5, ₹60.00)** — wholesome finger millet flatbreads rich in natural calcium and fiber.
+  Placed high-resolution studio imagery into `frontend/public/images/` and mirrored to `frontend/src/assets/`. Updated `seed_menu.py` management command and synchronized database records. Verified HTTP 200 image delivery on port 3000 and live DRF `/api/menu/` payload with 10 total menu items. Regenerated PDF documentation.
+* **Files Created / Modified:**
+  - `vmas/frontend/public/images/mudakathan_keerai_chapathi.jpg`
+  - `vmas/frontend/public/images/methi_chapathi.jpg`
+  - `vmas/frontend/public/images/ragi_chapathi.jpg`
+  - `vmas/frontend/src/assets/mudakathan_keerai_chapathi.jpg`
+  - `vmas/frontend/src/assets/methi_chapathi.jpg`
+  - `vmas/frontend/src/assets/ragi_chapathi.jpg`
+  - `vmas/backend/menu/management/commands/seed_menu.py`
+  - `vmas/docs/CHANGELOG.md`
+  - `vmas/docs/VMAS_Documentation.pdf`
+* **Run Commands:**
+  ```cmd
+  python backend/manage.py seed_menu
+  python docs/generate_pdf.py
+  git push origin main
+  ```
+
+
+
 
 
 
