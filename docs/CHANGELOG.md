@@ -252,6 +252,26 @@ Step-by-step implementation log detailing every milestone, file created/modified
   git push origin main
   ```
 
+---
+
+## Step 12: Menu Expansion - Added Authentic Maida Parotta
+* **Date:** 2026-10-20
+* **Summary:** Added traditional South Indian Maida Parotta to the VMAS menu catalog (Pack of 4, ₹50.00, crispy spiral layered golden parotta). Placed high-resolution studio imagery into `frontend/public/images/maida_parotta.jpg` and mirrored to `frontend/src/assets/`. Updated `seed_menu.py` management command and synchronized database records. Verified HTTP 200 image serving on port 3000 and live DRF `/api/menu/` payload with 7 total menu items. Regenerated PDF documentation.
+* **Files Created / Modified:**
+  - `vmas/frontend/public/images/maida_parotta.jpg`
+  - `vmas/frontend/src/assets/maida_parotta.jpg`
+  - `vmas/backend/menu/management/commands/seed_menu.py`
+  - `vmas/docs/CHANGELOG.md`
+  - `vmas/docs/VMAS_Documentation.pdf`
+* **Run Commands:**
+  ```cmd
+  python backend/manage.py seed_menu
+  python docs/generate_pdf.py
+  git push origin main
+  ```
+
+
+
 
 
 

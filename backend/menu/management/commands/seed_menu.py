@@ -62,6 +62,15 @@ class Command(BaseCommand):
                 'image': '/images/chola_poori.jpg',
                 'is_available': True,
             },
+            {
+                'name': 'Maida parotta',
+                'slug': 'maida-parotta-pack-of-4',
+                'pack_size': 'Pack of 4',
+                'price': Decimal('50.00'),
+                'description': 'Crispy, flaky, and golden layered traditional South Indian parottas, cooked to a golden crisp.',
+                'image': '/images/maida_parotta.jpg',
+                'is_available': True,
+            },
         ]
 
         created_count = 0
