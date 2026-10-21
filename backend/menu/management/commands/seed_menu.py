@@ -11,7 +11,7 @@ class Command(BaseCommand):
             {
                 'name': 'Chapathi',
                 'slug': 'chapathi-pack-of-5',
-                'pack_size': 'Pack of 5',
+                'pack_size': 'Pack of 10',
                 'price': Decimal('50.00'),
                 'description': 'Soft and freshly rolled whole wheat chapathis, cooked to perfection and hygienically packed.',
                 'image': '/images/chapathi.jpg',
@@ -20,7 +20,7 @@ class Command(BaseCommand):
             {
                 'name': 'Wheat parotta',
                 'slug': 'wheat-parotta-pack-of-4',
-                'pack_size': 'Pack of 4',
+                'pack_size': 'Pack of 10',
                 'price': Decimal('60.00'),
                 'description': 'Crispy yet soft layered parottas crafted with healthy 100% whole wheat flour.',
                 'image': '/images/wheat_parotta.jpg',
@@ -29,7 +29,7 @@ class Command(BaseCommand):
             {
                 'name': 'Plain naan',
                 'slug': 'plain-naan-pack-of-4',
-                'pack_size': 'Pack of 4',
+                'pack_size': 'Pack of 10',
                 'price': Decimal('80.00'),
                 'description': 'Traditional clay-oven style soft and fluffy tandoori naans, ideal with rich curries.',
                 'image': '/images/plain_naan.jpg',
@@ -38,7 +38,7 @@ class Command(BaseCommand):
             {
                 'name': 'Poori',
                 'slug': 'poori-pack-of-6',
-                'pack_size': 'Pack of 6',
+                'pack_size': 'Pack of 15',
                 'price': Decimal('60.00'),
                 'description': 'Golden, crisp and puffed pooris prepared fresh in high-grade cooking oil.',
                 'image': '/images/poori.jpg',
@@ -47,7 +47,7 @@ class Command(BaseCommand):
             {
                 'name': 'Bajra chapathi',
                 'slug': 'bajra-chapathi-pack-of-5',
-                'pack_size': 'Pack of 5',
+                'pack_size': 'Pack of 10',
                 'price': Decimal('60.00'),
                 'description': 'Nutritious gluten-free pearl millet rotis, freshly made on traditional tawa. Rich in fiber and iron.',
                 'image': '/images/bajra_chapathi.jpg',
@@ -56,7 +56,7 @@ class Command(BaseCommand):
             {
                 'name': 'Chola poori',
                 'slug': 'chola-poori-pack-of-3',
-                'pack_size': 'Pack of 3',
+                'pack_size': 'Pack of 12',
                 'price': Decimal('75.00'),
                 'description': 'Extra-large fluffy and golden bhatura-style pooris, fried crisp on the outside and soft inside.',
                 'image': '/images/chola_poori.jpg',
@@ -65,7 +65,7 @@ class Command(BaseCommand):
             {
                 'name': 'Maida parotta',
                 'slug': 'maida-parotta-pack-of-4',
-                'pack_size': 'Pack of 4',
+                'pack_size': 'Pack of 10',
                 'price': Decimal('50.00'),
                 'description': 'Crispy, flaky, and golden layered traditional South Indian parottas, cooked to a golden crisp.',
                 'image': '/images/maida_parotta.jpg',
@@ -74,7 +74,7 @@ class Command(BaseCommand):
             {
                 'name': 'Mudakathan keerai chapathi',
                 'slug': 'mudakathan-keerai-chapathi-pack-of-5',
-                'pack_size': 'Pack of 5',
+                'pack_size': 'Pack of 10',
                 'price': Decimal('65.00'),
                 'description': 'Traditional herbal chapathis infused with fresh medicinal Mudakathan keerai. Renowned for joint health and wellness.',
                 'image': '/images/mudakathan_keerai_chapathi.jpg',
@@ -83,7 +83,7 @@ class Command(BaseCommand):
             {
                 'name': 'Methi chapathi',
                 'slug': 'methi-chapathi-pack-of-5',
-                'pack_size': 'Pack of 5',
+                'pack_size': 'Pack of 10',
                 'price': Decimal('60.00'),
                 'description': 'Flavorful soft chapathis blended with fresh aromatic fenugreek (methi) leaves and mild traditional spices.',
                 'image': '/images/methi_chapathi.jpg',
@@ -92,7 +92,7 @@ class Command(BaseCommand):
             {
                 'name': 'Ragi chapathi',
                 'slug': 'ragi-chapathi-pack-of-5',
-                'pack_size': 'Pack of 5',
+                'pack_size': 'Pack of 10',
                 'price': Decimal('60.00'),
                 'description': '100% wholesome finger millet (Ragi) flatbreads, packed with calcium, fiber, and natural goodness.',
                 'image': '/images/ragi_chapathi.jpg',
