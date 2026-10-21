@@ -349,3 +349,19 @@ Step-by-step implementation log detailing every milestone, file created/modified
   python docs/generate_pdf.py
   git push origin main
   ```
+
+---
+
+## Step 16: Menu Asset Customization - Authentic Plain Naan Image Integration
+* **Date:** 2026-10-21
+* **Summary:** Replaced the Plain Naan menu image with the authentic, freshly prepared naan stack photograph provided by the client (featuring golden-brown blistered tandoor-style naan on a dark serving plate). Updated high-resolution assets in both `frontend/public/images/plain_naan.jpg` and `frontend/src/assets/plain_naan.jpg`. Verified HTTP 200 asset serving on port 3000 and live DRF `/api/menu/` payload. Regenerated PDF documentation.
+* **Files Created / Modified:**
+  - `vmas/frontend/public/images/plain_naan.jpg`
+  - `vmas/frontend/src/assets/plain_naan.jpg`
+  - `vmas/docs/CHANGELOG.md`
+  - `vmas/docs/VMAS_Documentation.pdf`
+* **Run Commands:**
+  ```cmd
+  python docs/generate_pdf.py
+  git push origin main
+  ```
