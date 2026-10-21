@@ -323,3 +323,29 @@ Step-by-step implementation log detailing every milestone, file created/modified
   git push origin main
   ```
 
+---
+
+## Step 15: Menu Price Restructuring - Updated All Item Prices
+* **Date:** 2026-10-21
+* **Summary:** Updated the pricing across all 10 food items to align with increased portion sizes:
+  - Wheat Parotta (Pack of 10): **₹160.00** (was ₹60.00)
+  - Maida Parotta (Pack of 10): **₹160.00** (was ₹50.00)
+  - Chapathi (Pack of 10): **₹90.00** (was ₹50.00)
+  - Mudakathan Keerai Chapathi (Pack of 10): **₹110.00** (was ₹65.00)
+  - Methi Chapathi (Pack of 10): **₹110.00** (was ₹60.00)
+  - Ragi Chapathi (Pack of 10): **₹120.00** (was ₹60.00)
+  - Plain Naan (Pack of 10): **₹130.00** (was ₹80.00)
+  - Poori (Pack of 15): **₹110.00** (was ₹60.00)
+  - Bajra Chapathi (Pack of 10): **₹110.00** (was ₹60.00)
+  - Chola Poori (Pack of 12): **₹130.00** (was ₹75.00)
+  Updated `seed_menu.py` management command and synchronized database records. Verified all 10 items reflect updated prices across `/api/menu/` and frontend cards. Regenerated PDF documentation.
+* **Files Created / Modified:**
+  - `vmas/backend/menu/management/commands/seed_menu.py`
+  - `vmas/docs/CHANGELOG.md`
+  - `vmas/docs/VMAS_Documentation.pdf`
+* **Run Commands:**
+  ```cmd
+  python backend/manage.py seed_menu
+  python docs/generate_pdf.py
+  git push origin main
+  ```
