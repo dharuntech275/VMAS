@@ -1,82 +1,126 @@
 import React from 'react';
-import { UtensilsCrossed, Phone, MapPin, Clock, ShieldCheck } from 'lucide-react';
+import { UtensilsCrossed, Phone, MapPin, Clock, ShieldCheck, Heart, Sparkles, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <footer className="mt-auto bg-[#0E3523] text-emerald-100 border-t border-[#1D5E40] pt-12 pb-8">
+    <footer className="mt-auto bg-gradient-to-b from-[#0E3523] to-[#081B12] text-emerald-100 border-t border-[#1D5E40] pt-14 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
-          {/* Brand info */}
-          <div className="md:col-span-2 space-y-3">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-[#F2B705] flex items-center justify-center text-[#14452F]">
-                <UtensilsCrossed className="w-5 h-5" />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+          {/* Brand & Mission Column */}
+          <div className="md:col-span-2 space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-[#F2B705] flex items-center justify-center text-[#14452F] shadow-lg shadow-[#F2B705]/20">
+                <UtensilsCrossed className="w-6 h-6 stroke-[2.5]" />
               </div>
-              <span className="text-2xl font-black tracking-wider text-[#F2B705]">
-                VMAS
-              </span>
+              <div className="flex flex-col">
+                <span className="text-2xl font-black tracking-tight text-[#F2B705]">
+                  VMAS
+                </span>
+                <span className="text-[10px] font-bold tracking-widest uppercase text-emerald-300">
+                  VMA Services • Fresh Food Packs
+                </span>
+              </div>
             </div>
-            <p className="text-sm text-emerald-200/80 max-w-sm leading-relaxed">
-              VMA Services - Fresh, hygienic, and ready-made food packs delivered right to your
-              doorstep. Wholesome Chapathis, Parottas, Naans, and Pooris packed in family portions.
+
+            <p className="text-xs sm:text-sm text-emerald-200/80 max-w-md leading-relaxed">
+              We specialize in freshly prepared, ready-to-eat bread packs delivered straight from our kitchen tawas to your dining table. Wholesome Chapathis, Parottas, Naan, and traditional Millet rotis packed in family portions.
             </p>
-            <div className="flex items-center gap-2 text-xs text-[#F2B705] font-semibold">
-              <ShieldCheck className="w-4 h-4" />
-              <span>100% Whole Wheat & Freshly Made Daily</span>
+
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <div className="flex items-center gap-1.5 text-xs text-emerald-200 font-bold bg-[#14452F] border border-[#1D5E40] px-3 py-1.5 rounded-full">
+                <CheckCircle2 className="w-4 h-4 text-[#F2B705]" />
+                <span>100% Whole Grain Flour</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-xs text-emerald-200 font-bold bg-[#14452F] border border-[#1D5E40] px-3 py-1.5 rounded-full">
+                <ShieldCheck className="w-4 h-4 text-[#F2B705]" />
+                <span>Zero Added Preservatives</span>
+              </div>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick Menu Categories */}
           <div>
-            <h4 className="font-bold text-white text-base mb-3 text-[#F2B705]">Quick Links</h4>
-            <ul className="space-y-2 text-sm text-emerald-200/80">
+            <h4 className="font-black text-white text-base mb-4 text-[#F2B705] uppercase tracking-wider text-xs">
+              Bread Categories
+            </h4>
+            <ul className="space-y-2.5 text-xs sm:text-sm text-emerald-200/80">
               <li>
-                <Link to="/" className="hover:text-white transition-colors">
-                  Home
+                <Link to="/menu?q=chapathi" className="hover:text-[#F2B705] transition-colors flex items-center gap-1.5">
+                  <span>🌾</span>
+                  <span>Soft Chapathi & Rotis</span>
                 </Link>
               </li>
               <li>
-                <Link to="/menu" className="hover:text-white transition-colors">
-                  Explore Menu Packs
+                <Link to="/menu?q=parotta" className="hover:text-[#F2B705] transition-colors flex items-center gap-1.5">
+                  <span>🥞</span>
+                  <span>Crispy Layered Parottas</span>
                 </Link>
               </li>
               <li>
-                <Link to="/cart" className="hover:text-white transition-colors">
-                  My Cart
+                <Link to="/menu?q=naan" className="hover:text-[#F2B705] transition-colors flex items-center gap-1.5">
+                  <span>🫓</span>
+                  <span>Tandoori Naan & Pooris</span>
                 </Link>
               </li>
               <li>
-                <Link to="/track" className="hover:text-white transition-colors">
-                  Track Live Order
+                <Link to="/menu?q=keerai" className="hover:text-[#F2B705] transition-colors flex items-center gap-1.5">
+                  <span>🌿</span>
+                  <span>Herbal & Millet Specials</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/track" className="hover:text-[#F2B705] transition-colors flex items-center gap-1.5">
+                  <span>📍</span>
+                  <span>Live Order Tracking</span>
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Operating hours & contact */}
+          {/* Operating hours & Kitchen Contact */}
           <div>
-            <h4 className="font-bold text-white text-base mb-3 text-[#F2B705]">Service Info</h4>
-            <ul className="space-y-2.5 text-xs text-emerald-200/80">
-              <li className="flex items-start gap-2">
+            <h4 className="font-black text-white text-base mb-4 text-[#F2B705] uppercase tracking-wider text-xs">
+              Kitchen & Service
+            </h4>
+            <ul className="space-y-3 text-xs text-emerald-200/80">
+              <li className="flex items-start gap-2.5">
                 <Clock className="w-4 h-4 text-[#F2B705] flex-shrink-0 mt-0.5" />
-                <span>Morning Batch: 6:30 AM - 10:30 AM<br/>Evening Batch: 5:30 PM - 10:00 PM</span>
+                <span>
+                  <strong>Daily Kitchen Batches:</strong><br />
+                  Morning: 6:30 AM - 10:30 AM<br />
+                  Evening: 5:30 PM - 10:30 PM
+                </span>
               </li>
-              <li className="flex items-center gap-2">
+              <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#F2B705] flex-shrink-0" />
-                <span>Customer Support: 98765 43210</span>
+                <span>
+                  Customer Hotline: <strong>98765 43210</strong>
+                </span>
               </li>
-              <li className="flex items-start gap-2">
+              <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#F2B705] flex-shrink-0 mt-0.5" />
-                <span>Kitchen Facility: VMA Services Center</span>
+                <span>
+                  VMAS Central Kitchen Center,<br />
+                  Doorstep Delivery Across City
+                </span>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-[#1D5E40] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-emerald-300/60">
-          <p>© {new Date().getFullYear()} VMAS (VMA Services). All rights reserved.</p>
-          <p>Fresh Food Packs Delivery Platform</p>
+        {/* Bottom Bar: Payment icons & Copyright */}
+        <div className="border-t border-[#1D5E40] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-emerald-300/60">
+          <div className="flex items-center gap-2">
+            <span>Accepted Payments:</span>
+            <div className="flex items-center gap-1.5 font-bold text-emerald-200">
+              <span className="bg-[#14452F] px-2 py-0.5 rounded text-[10px]">UPI</span>
+              <span className="bg-[#14452F] px-2 py-0.5 rounded text-[10px]">GPay</span>
+              <span className="bg-[#14452F] px-2 py-0.5 rounded text-[10px]">PhonePe</span>
+              <span className="bg-[#14452F] px-2 py-0.5 rounded text-[10px]">Cash on Delivery</span>
+            </div>
+          </div>
+          <p>© {new Date().getFullYear()} VMAS (VMA Services). Fresh Ready-Made Food Packs Delivery.</p>
         </div>
       </div>
     </footer>

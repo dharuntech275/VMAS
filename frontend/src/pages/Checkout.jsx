@@ -1,16 +1,39 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { ShoppingBag, ArrowLeft, ShieldCheck, CheckCircle2, AlertCircle, Loader2, CreditCard, Banknote } from 'lucide-react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
+import {
+  ShoppingBag,
+  ArrowLeft,
+  ShieldCheck,
+  CheckCircle2,
+  AlertCircle,
+  Loader2,
+  CreditCard,
+  Banknote,
+  MapPin,
+  User,
+  Phone,
+  Sparkles,
+  Zap,
+} from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 import api from '../api/client';
 
 export default function Checkout() {
-  useDocumentTitle('Checkout & Delivery');
+  useDocumentTitle('Checkout & Delivery Details - VMAS');
   const { cart, totalAmount, totalItems, clearCart } = useCart();
   const { showToast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Discount and tip passed from Cart.jsx (optional)
+  const discountAmount = location.state?.discount || 0;
+  const tipAmount = location.state?.tip || 0;
+  const couponCode = location.state?.couponCode || null;
+  const cookingNotes = location.state?.cookingNotes || '';
+
+  const finalPayable = Math.max(0, totalAmount - discountAmount + tipAmount);
 
   const [formData, setFormData] = useState({
     customer_name: '',
@@ -19,6 +42,7 @@ export default function Checkout() {
     payment_method: 'COD',
   });
 
+  const [addressType, setAddressType] = useState('Home');
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [generalError, setGeneralError] = useState(null);
@@ -26,9 +50,9 @@ export default function Checkout() {
   // If cart is empty, redirect or prompt
   if (cart.length === 0) {
     return (
-      <div className="py-12 px-4 max-w-md mx-auto text-center space-y-4">
-        <div className="w-16 h-16 rounded-2xl bg-emerald-50 dark:bg-emerald-950 text-[#14452F] dark:text-[#F2B705] flex items-center justify-center mx-auto">
-          <ShoppingBag className="w-8 h-8" />
+      <div className="py-16 px-4 max-w-md mx-auto text-center space-y-4">
+        <div className="w-20 h-20 rounded-3xl bg-emerald-50 dark:bg-emerald-950/70 text-[#14452F] dark:text-[#F2B705] flex items-center justify-center mx-auto shadow-inner">
+          <ShoppingBag className="w-10 h-10" />
         </div>
         <h2 className="text-2xl font-black text-slate-900 dark:text-white">Your Cart is Empty</h2>
         <p className="text-sm text-slate-500 dark:text-slate-400">
@@ -36,9 +60,9 @@ export default function Checkout() {
         </p>
         <Link
           to="/menu"
-          className="inline-block bg-[#14452F] text-white px-6 py-3 rounded-xl font-bold text-sm"
+          className="inline-block bg-[#14452F] text-white px-7 py-3.5 rounded-2xl font-black text-sm shadow-md"
         >
-          Menu-ku po
+          Explore Menu Packs
         </Link>
       </div>
     );
@@ -80,10 +104,12 @@ export default function Checkout() {
 
     setSubmitting(true);
 
+    const fullAddress = addressType ? `[${addressType}] ${formData.address.trim()}` : formData.address.trim();
+
     const payload = {
       customer_name: formData.customer_name.trim(),
       phone: formData.phone.trim(),
-      address: formData.address.trim(),
+      address: fullAddress,
       payment_method: formData.payment_method,
       items: cart.map((item) => ({
         menu_item: item.id,
@@ -112,7 +138,6 @@ export default function Checkout() {
       );
     } catch (err) {
       console.error('Order creation error:', err);
-      // Backend error response format: { phone: [...], address: [...], detail: ... }
       if (err.data && typeof err.data === 'object') {
         const backendErrors = {};
         for (const [key, val] of Object.entries(err.data)) {
@@ -131,19 +156,24 @@ export default function Checkout() {
   };
 
   return (
-    <div className="py-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-8">
+    <div className="py-8 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-8">
       {/* Back button & Title */}
       <div>
         <Link
           to="/cart"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:underline mb-2"
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 dark:text-emerald-400 hover:underline mb-2"
         >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Back to Cart</span>
+          <ArrowLeft className="w-3.5 h-3.5 stroke-[2.5]" />
+          <span>Return to Cart</span>
         </Link>
-        <h1 className="text-3xl font-black text-slate-900 dark:text-white">Delivery Checkout</h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-          Complete your delivery details to place your fresh bread packs order.
+        <div className="flex items-center gap-2.5">
+          <h1 className="text-3xl font-black text-slate-900 dark:text-white">Delivery & Payment</h1>
+          <span className="bg-[#14452F] text-[#F2B705] text-xs font-black px-2.5 py-0.5 rounded-full">
+            {totalItems} {totalItems === 1 ? 'pack' : 'packs'}
+          </span>
+        </div>
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+          Enter your location details to receive hot food packs freshly cooked from our kitchen.
         </p>
       </div>
 
@@ -154,34 +184,58 @@ export default function Checkout() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Order Form */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        {/* Order Form (2 columns) */}
         <form onSubmit={handleSubmit} className="lg:col-span-2 space-y-6">
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14211B] border border-emerald-100 dark:border-emerald-900/40 shadow-sm space-y-5">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white pb-3 border-b border-slate-100 dark:border-emerald-900/40">
-              1. Customer Information
-            </h2>
+          {/* Section 1: Contact & Delivery Address */}
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#121F19] border border-slate-200/80 dark:border-emerald-900/40 shadow-sm space-y-5">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-emerald-900/40">
+              <h2 className="text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-[#14452F] dark:text-[#F2B705]" />
+                <span>1. Delivery Destination</span>
+              </h2>
+              {/* Quick Tag Pills */}
+              <div className="flex items-center gap-1.5">
+                {['Home', 'Work', 'Other'].map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => setAddressType(t)}
+                    className={`px-3 py-1 rounded-xl text-xs font-black transition-all cursor-pointer ${
+                      addressType === t
+                        ? 'bg-[#14452F] text-[#F2B705] shadow-sm'
+                        : 'bg-slate-100 dark:bg-[#0B1410] text-slate-600 dark:text-slate-400 hover:bg-slate-200'
+                    }`}
+                  >
+                    {t === 'Home' ? '🏠 Home' : t === 'Work' ? '🏢 Work' : '📍 Other'}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             {/* Name */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-black text-slate-700 dark:text-slate-300 mb-1.5 uppercase tracking-wider">
                 Full Name *
               </label>
-              <input
-                type="text"
-                required
-                placeholder="e.g. Ramesh Kumar"
-                value={formData.customer_name}
-                onChange={(e) => {
-                  setFormData({ ...formData, customer_name: e.target.value });
-                  if (errors.customer_name) setErrors({ ...errors, customer_name: null });
-                }}
-                className={`w-full px-4 py-3 rounded-xl border ${
-                  errors.customer_name
-                    ? 'border-rose-500 bg-rose-50/30'
-                    : 'border-slate-200 dark:border-emerald-900/60 bg-[#FBFBFA] dark:bg-[#0B1510]'
-                } text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#14452F] dark:focus:ring-[#F2B705]`}
-              />
+              <div className="relative">
+                <User className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Ramesh Kumar"
+                  value={formData.customer_name}
+                  onChange={(e) => {
+                    setFormData({ ...formData, customer_name: e.target.value });
+                    if (errors.customer_name) setErrors({ ...errors, customer_name: null });
+                  }}
+                  className={`w-full pl-10 pr-4 py-3 rounded-2xl border ${
+                    errors.customer_name
+                      ? 'border-rose-500 bg-rose-50/30'
+                      : 'border-slate-200 dark:border-emerald-900/60 bg-slate-50 dark:bg-[#0B1410]'
+                  } text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#14452F] dark:focus:ring-[#F2B705]`}
+                />
+              </div>
               {errors.customer_name && (
                 <p className="text-xs text-rose-500 font-semibold mt-1">
                   {errors.customer_name}
@@ -191,11 +245,11 @@ export default function Checkout() {
 
             {/* Phone */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-black text-slate-700 dark:text-slate-300 mb-1.5 uppercase tracking-wider">
                 Mobile Number (10 Digits) *
               </label>
               <div className="relative">
-                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">
+                <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-black text-slate-400">
                   +91
                 </span>
                 <input
@@ -209,10 +263,10 @@ export default function Checkout() {
                     setFormData({ ...formData, phone: val });
                     if (errors.phone) setErrors({ ...errors, phone: null });
                   }}
-                  className={`w-full pl-12 pr-4 py-3 rounded-xl border ${
+                  className={`w-full pl-12 pr-4 py-3 rounded-2xl border ${
                     errors.phone
                       ? 'border-rose-500 bg-rose-50/30'
-                      : 'border-slate-200 dark:border-emerald-900/60 bg-[#FBFBFA] dark:bg-[#0B1510]'
+                      : 'border-slate-200 dark:border-emerald-900/60 bg-slate-50 dark:bg-[#0B1410]'
                   } text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#14452F] dark:focus:ring-[#F2B705]`}
                 />
               </div>
@@ -220,29 +274,29 @@ export default function Checkout() {
                 <p className="text-xs text-rose-500 font-semibold mt-1">{errors.phone}</p>
               ) : (
                 <p className="text-[11px] text-slate-400 dark:text-slate-500 mt-1">
-                  Used for order verification & status tracking.
+                  We send SMS status updates and our delivery rider will call upon arrival.
                 </p>
               )}
             </div>
 
             {/* Address */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5 uppercase tracking-wider">
-                Delivery Address *
+              <label className="block text-xs font-black text-slate-700 dark:text-slate-300 mb-1.5 uppercase tracking-wider">
+                Complete Street / Flat / Landmark Address *
               </label>
               <textarea
                 rows={3}
                 required
-                placeholder="Door/Flat no, Apartment name, Street, Area landmark..."
+                placeholder="Door/Flat no, Building / Apartment name, Street, Main Landmark..."
                 value={formData.address}
                 onChange={(e) => {
                   setFormData({ ...formData, address: e.target.value });
                   if (errors.address) setErrors({ ...errors, address: null });
                 }}
-                className={`w-full px-4 py-3 rounded-xl border ${
+                className={`w-full px-4 py-3 rounded-2xl border ${
                   errors.address
                     ? 'border-rose-500 bg-rose-50/30'
-                    : 'border-slate-200 dark:border-emerald-900/60 bg-[#FBFBFA] dark:bg-[#0B1510]'
+                    : 'border-slate-200 dark:border-emerald-900/60 bg-slate-50 dark:bg-[#0B1410]'
                 } text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#14452F] dark:focus:ring-[#F2B705]`}
               />
               {errors.address && (
@@ -251,17 +305,18 @@ export default function Checkout() {
             </div>
           </div>
 
-          {/* Payment Method */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#14211B] border border-emerald-100 dark:border-emerald-900/40 shadow-sm space-y-4">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white pb-3 border-b border-slate-100 dark:border-emerald-900/40">
-              2. Payment Method
+          {/* Section 2: Payment Method Selection */}
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#121F19] border border-slate-200/80 dark:border-emerald-900/40 shadow-sm space-y-4">
+            <h2 className="text-lg font-black text-slate-900 dark:text-white pb-3 border-b border-slate-100 dark:border-emerald-900/40 flex items-center gap-2">
+              <CreditCard className="w-5 h-5 text-[#14452F] dark:text-[#F2B705]" />
+              <span>2. Payment Option</span>
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <label
-                className={`flex items-center gap-3 p-4 rounded-2xl border-2 cursor-pointer transition-all ${
+                className={`flex items-start gap-3.5 p-4 rounded-2xl border-2 cursor-pointer transition-all ${
                   formData.payment_method === 'COD'
-                    ? 'border-[#14452F] dark:border-[#F2B705] bg-emerald-50/50 dark:bg-emerald-950/40'
+                    ? 'border-[#14452F] dark:border-[#F2B705] bg-emerald-50/60 dark:bg-emerald-950/50 shadow-sm'
                     : 'border-slate-200 dark:border-emerald-900/40 hover:border-slate-300'
                 }`}
               >
@@ -271,23 +326,25 @@ export default function Checkout() {
                   value="COD"
                   checked={formData.payment_method === 'COD'}
                   onChange={() => setFormData({ ...formData, payment_method: 'COD' })}
-                  className="accent-[#14452F]"
+                  className="mt-1 accent-[#14452F]"
                 />
-                <Banknote className="w-5 h-5 text-emerald-700 dark:text-emerald-400" />
                 <div>
-                  <div className="font-bold text-sm text-slate-900 dark:text-white">
-                    Cash on Delivery
+                  <div className="flex items-center gap-1.5">
+                    <Banknote className="w-4 h-4 text-emerald-700 dark:text-emerald-400" />
+                    <span className="font-black text-sm text-slate-900 dark:text-white">
+                      Cash on Delivery (COD)
+                    </span>
                   </div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400">
-                    Pay cash upon receiving food
-                  </div>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                    Pay liquid cash when the hot food packs arrive.
+                  </p>
                 </div>
               </label>
 
               <label
-                className={`flex items-center gap-3 p-4 rounded-2xl border-2 cursor-pointer transition-all ${
+                className={`flex items-start gap-3.5 p-4 rounded-2xl border-2 cursor-pointer transition-all ${
                   formData.payment_method === 'UPI'
-                    ? 'border-[#14452F] dark:border-[#F2B705] bg-emerald-50/50 dark:bg-emerald-950/40'
+                    ? 'border-[#14452F] dark:border-[#F2B705] bg-emerald-50/60 dark:bg-emerald-950/50 shadow-sm'
                     : 'border-slate-200 dark:border-emerald-900/40 hover:border-slate-300'
                 }`}
               >
@@ -297,81 +354,117 @@ export default function Checkout() {
                   value="UPI"
                   checked={formData.payment_method === 'UPI'}
                   onChange={() => setFormData({ ...formData, payment_method: 'UPI' })}
-                  className="accent-[#14452F]"
+                  className="mt-1 accent-[#14452F]"
                 />
-                <CreditCard className="w-5 h-5 text-[#F2B705]" />
                 <div>
-                  <div className="font-bold text-sm text-slate-900 dark:text-white">UPI Payment</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-400">
-                    Pay via GPay / PhonePe on delivery
+                  <div className="flex items-center gap-1.5">
+                    <CreditCard className="w-4 h-4 text-[#F2B705]" />
+                    <span className="font-black text-sm text-slate-900 dark:text-white">
+                      Instant UPI / QR Pay
+                    </span>
                   </div>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                    Scan QR on delivery via Google Pay, PhonePe, or Paytm.
+                  </p>
                 </div>
               </label>
             </div>
           </div>
 
-          {/* Place Order CTA */}
+          {/* Place Order CTA Button */}
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-4 px-6 rounded-2xl bg-[#F2B705] hover:bg-[#DCA502] text-[#14452F] font-black text-lg flex items-center justify-center gap-2 shadow-lg transition-all transform hover:-translate-y-0.5 disabled:opacity-60 cursor-pointer"
+            className="w-full py-4.5 px-6 rounded-2xl bg-gradient-to-r from-[#F2B705] to-[#E5AC02] hover:from-[#E5AC02] hover:to-[#DCA502] text-[#14452F] font-black text-lg flex items-center justify-center gap-3 shadow-xl shadow-[#F2B705]/20 hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-0.5 disabled:opacity-60 cursor-pointer"
           >
             {submitting ? (
               <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                <span>Placing Your Order...</span>
+                <Loader2 className="w-6 h-6 animate-spin text-[#14452F]" />
+                <span>Confirming Order...</span>
               </>
             ) : (
-              <span>Confirm & Place Order (₹{totalAmount.toFixed(2)})</span>
+              <>
+                <Zap className="w-5 h-5 fill-current" />
+                <span>Confirm & Place Order (₹{finalPayable.toFixed(2)})</span>
+              </>
             )}
           </button>
         </form>
 
         {/* Order Summary Sidebar */}
-        <div className="space-y-4">
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#14211B] border border-emerald-100 dark:border-emerald-900/40 shadow-sm space-y-4">
-            <h3 className="font-bold text-base text-slate-900 dark:text-white border-b border-slate-100 dark:border-emerald-900/40 pb-3">
+        <div className="space-y-4 lg:sticky lg:top-24">
+          <div className="p-6 rounded-3xl bg-white dark:bg-[#121F19] border border-slate-200/80 dark:border-emerald-900/40 shadow-sm space-y-4">
+            <h3 className="font-black text-base text-slate-900 dark:text-white border-b border-slate-100 dark:border-emerald-900/40 pb-3">
               Order Summary ({totalItems} packs)
             </h3>
 
-            <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
+            {/* Thumbnail preview list */}
+            <div className="space-y-3 max-h-64 overflow-y-auto pr-1">
               {cart.map((item) => (
-                <div key={item.id} className="flex justify-between items-center text-xs">
-                  <div>
-                    <span className="font-bold text-slate-800 dark:text-slate-200">
-                      {item.quantity}x {item.name}
-                    </span>
-                    <span className="text-slate-400 block text-[10px]">{item.pack_size}</span>
+                <div key={item.id} className="flex items-center justify-between gap-3 text-xs">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-emerald-950/80 overflow-hidden flex-shrink-0">
+                      {item.image && (
+                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                      )}
+                    </div>
+                    <div className="min-w-0">
+                      <div className="font-black text-slate-900 dark:text-white truncate">
+                        {item.quantity}x {item.name}
+                      </div>
+                      <div className="text-[10px] text-slate-400">{item.pack_size}</div>
+                    </div>
                   </div>
-                  <span className="font-semibold text-slate-700 dark:text-slate-300">
+                  <span className="font-bold text-slate-900 dark:text-white flex-shrink-0">
                     ₹{(item.price * item.quantity).toFixed(0)}
                   </span>
                 </div>
               ))}
             </div>
 
-            <div className="border-t border-slate-100 dark:border-emerald-900/40 pt-3 space-y-1.5 text-xs">
+            {/* Price Calculations */}
+            <div className="border-t border-slate-100 dark:border-emerald-900/40 pt-3 space-y-2 text-xs">
               <div className="flex justify-between text-slate-600 dark:text-slate-400">
                 <span>Items Subtotal</span>
                 <span>₹{totalAmount.toFixed(2)}</span>
               </div>
+
+              {discountAmount > 0 && (
+                <div className="flex justify-between text-emerald-600 dark:text-emerald-400 font-bold">
+                  <span>Coupon Discount ({couponCode || 'Promo'})</span>
+                  <span>-₹{discountAmount.toFixed(2)}</span>
+                </div>
+              )}
+
+              {tipAmount > 0 && (
+                <div className="flex justify-between text-slate-600 dark:text-slate-400">
+                  <span>Delivery Partner Tip</span>
+                  <span>₹{tipAmount.toFixed(2)}</span>
+                </div>
+              )}
+
               <div className="flex justify-between text-slate-600 dark:text-slate-400">
-                <span>Delivery</span>
-                <span className="text-emerald-600 font-bold">FREE</span>
+                <span className="flex items-center gap-1">
+                  Delivery Fee
+                  <span className="text-[9px] bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 font-black px-1 rounded">FREE</span>
+                </span>
+                <span className="text-emerald-600 font-black">₹0.00</span>
               </div>
-              <div className="flex justify-between text-base font-black text-slate-900 dark:text-white pt-2 border-t border-dashed border-slate-200 dark:border-emerald-900/60">
-                <span>Total Amount</span>
-                <span className="text-[#14452F] dark:text-[#F2B705]">
-                  ₹{totalAmount.toFixed(2)}
+
+              <div className="flex justify-between text-lg font-black text-slate-900 dark:text-white pt-2 border-t border-dashed border-slate-200 dark:border-emerald-900/60">
+                <span>Total Payable</span>
+                <span className="text-xl text-[#14452F] dark:text-[#F2B705]">
+                  ₹{finalPayable.toFixed(2)}
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/60 text-xs text-emerald-800 dark:text-emerald-300 flex items-start gap-2.5">
-            <ShieldCheck className="w-4 h-4 flex-shrink-0 text-emerald-700 dark:text-emerald-400 mt-0.5" />
+          {/* Safe Food Promise */}
+          <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 text-xs text-emerald-900 dark:text-emerald-200 flex items-start gap-3">
+            <ShieldCheck className="w-5 h-5 flex-shrink-0 text-emerald-700 dark:text-emerald-400" />
             <span>
-              Orders are prepared fresh. Backend calculates final bill securely using current rates.
+              <strong>Guaranteed Hot Delivery:</strong> Food is sealed into thermal pouches immediately upon cooking to maintain high temperature and crispness.
             </span>
           </div>
         </div>

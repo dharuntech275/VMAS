@@ -7,11 +7,14 @@
   --color-banana: #14452F;
   --color-banana-hover: #0E3523;
   --color-banana-light: #1D5E40;
+  --color-banana-soft: #E8F2EC;
   --color-turmeric: #F2B705;
   --color-turmeric-hover: #DCA502;
+  --color-turmeric-light: #FFF8E1;
   --color-offwhite: #FBFBFA;
-  --color-dark-bg: #0D1612;
-  --color-dark-surface: #14211B;
+  --color-dark-bg: #0B1410;
+  --color-dark-surface: #121F19;
+  --color-dark-card: #16261F;
 }
 
 html {
@@ -22,6 +25,33 @@ body {
   font-family: var(--font-sans);
   margin: 0;
   padding: 0;
+  background-color: #F8FAF8;
+  color: #1E293B;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-color: #0B1410;
+  color: #F1F5F9;
+}
+
+/* Custom Smooth Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #1D5E40;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
 }
 
 /* Accessibility: Consistent, high-visibility keyboard focus rings */
@@ -32,4 +62,47 @@ textarea:focus-visible,
 select:focus-visible {
   outline: 2px solid #F2B705 !important;
   outline-offset: 2px !important;
+}
+
+/* Subtle Shimmer Animation for Badges & Buttons */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2.5s infinite;
+}
+
+/* Floating Animation for decorative hero elements */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+/* Subtle Pulse Glow */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Glassmorphism Card Utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dark .glass-panel {
+  background: rgba(18, 31, 25, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
