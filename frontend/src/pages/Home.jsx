@@ -15,13 +15,18 @@ import {
   Heart,
   Award,
   Zap,
+  Wheat,
+  Layers,
+  CircleDot,
+  Leaf,
+  CheckCircle2,
 } from 'lucide-react';
 import api from '../api/client';
 import MenuCard from '../components/MenuCard';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
 export default function Home() {
-  useDocumentTitle('Hot Fresh Rotis & Food Packs Delivered');
+  useDocumentTitle('Fresh Ready-Made Food Packets - VMAS');
   const [popularItems, setPopularItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -32,14 +37,13 @@ export default function Home() {
       .getMenu()
       .then((data) => {
         if (isMounted) {
-          // Show top 6 items
           setPopularItems(data.slice(0, 6));
           setLoading(false);
         }
       })
       .catch((err) => {
         if (isMounted) {
-          setError(err.message || 'Unable to load popular items');
+          setError(err.message || 'Unable to load popular packets');
           setLoading(false);
         }
       });
@@ -58,25 +62,26 @@ export default function Home() {
           <div className="flex flex-wrap items-center gap-2">
             <div className="inline-flex items-center gap-1.5 bg-[#F2B705]/20 border border-[#F2B705]/40 text-[#F2B705] text-xs font-black px-3.5 py-1.5 rounded-full shadow-sm">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>100% WHOLE WHEAT & HEALTHY MILLETS</span>
+              <span>FRESH READY-MADE FOOD PACKETS</span>
             </div>
-            <div className="hidden sm:inline-flex items-center gap-1.5 bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-bold px-3 py-1.5 rounded-full">
+            <div className="inline-flex items-center gap-1.5 bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-bold px-3 py-1.5 rounded-full">
               <Flame className="w-3.5 h-3.5 text-[#F2B705]" />
-              <span>FRESHLY COOKED ON ORDER</span>
+              <span>JUST TOAST ON TAWA & EAT AT HOME</span>
             </div>
           </div>
 
           {/* Main Headline */}
           <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-[1.08]">
-            Hot rotis at your door,{' '}
+            Fresh ready-made packets,{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F2B705] to-[#FFD54F]">
-              ready to eat.
+              toast & eat at home.
             </span>
           </h1>
 
           <p className="text-base sm:text-xl text-emerald-100/90 leading-relaxed font-normal max-w-2xl">
-            Skip tedious kneading, rolling, and cooking. Wholesome family packs of Chapathi,
-            Wheat & Maida Parotta, Naan, Pooris, and nutritious Herbal rotis — delivered steaming hot to your dinner table.
+            No kneading dough, no rolling, zero mess! Hygienically sealed ready-to-cook packets of
+            Chapathi, Wheat & Maida Parotta, Naan, and Poori. Delivered to your doorstep —
+            simply roast on your home tawa for 1 minute and enjoy hot with your family!
           </p>
 
           {/* CTA Buttons */}
@@ -85,7 +90,7 @@ export default function Home() {
               to="/menu"
               className="inline-flex items-center gap-3 bg-gradient-to-r from-[#F2B705] to-[#E5AC02] hover:from-[#E5AC02] hover:to-[#DCA502] text-[#14452F] font-black text-base px-8 py-4 rounded-2xl shadow-xl shadow-[#F2B705]/20 hover:shadow-2xl transition-all duration-200 transform hover:-translate-y-0.5 group"
             >
-              <span>Explore Menu Packs</span>
+              <span>Order Food Packets</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
 
@@ -102,7 +107,7 @@ export default function Home() {
           <div className="grid grid-cols-3 gap-4 pt-6 border-t border-emerald-800/60 max-w-lg">
             <div>
               <div className="text-2xl sm:text-3xl font-black text-[#F2B705]">10,000+</div>
-              <div className="text-xs text-emerald-200 font-medium">Packs Delivered</div>
+              <div className="text-xs text-emerald-200 font-medium">Packets Delivered</div>
             </div>
             <div>
               <div className="text-2xl sm:text-3xl font-black text-white flex items-center gap-1">
@@ -111,8 +116,8 @@ export default function Home() {
               <div className="text-xs text-emerald-200 font-medium">Customer Rating</div>
             </div>
             <div>
-              <div className="text-2xl sm:text-3xl font-black text-[#F2B705]">30 mins</div>
-              <div className="text-xs text-emerald-200 font-medium">Average Delivery</div>
+              <div className="text-2xl sm:text-3xl font-black text-[#F2B705]">1 Min</div>
+              <div className="text-xs text-emerald-200 font-medium">Tawa Roasting Time</div>
             </div>
           </div>
         </div>
@@ -122,15 +127,15 @@ export default function Home() {
         <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
       </section>
 
-      {/* Quick Category Navigation Pills */}
+      {/* Quick Category Navigation Pills (SVG Icons, zero broken emojis) */}
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
             <span className="text-xs font-black uppercase tracking-widest text-[#14452F] dark:text-[#F2B705]">
-              Fresh Choices
+              Ready-to-Cook Choices
             </span>
             <h2 className="text-2xl font-black text-slate-900 dark:text-white">
-              Popular Bread Categories
+              Explore Packet Categories
             </h2>
           </div>
           <Link
@@ -146,52 +151,57 @@ export default function Home() {
           {[
             {
               title: 'Wheat & Rotis',
-              desc: 'Chapathi & Soft Phulkas',
+              desc: 'Chapathi Packets • Just Tawa Roast',
               badge: 'From ₹90',
-              icon: '🌾',
+              icon: Wheat,
               filter: 'chapathi',
             },
             {
               title: 'Layered Parottas',
-              desc: 'Wheat & Classic Maida',
+              desc: 'Wheat & Maida • Crispy & Flaky',
               badge: 'From ₹160',
-              icon: '🥞',
+              icon: Layers,
               filter: 'parotta',
             },
             {
               title: 'Naan & Bhatura',
-              desc: 'Tandoori Naan & Chola Poori',
+              desc: 'Tandoori Naan & Chola Poori Packs',
               badge: 'From ₹110',
-              icon: '🫓',
+              icon: CircleDot,
               filter: 'naan',
             },
             {
               title: 'Herbal & Millets',
-              desc: 'Ragi, Bajra, Keerai & Methi',
+              desc: 'Ragi, Bajra, Keerai & Methi Packs',
               badge: 'From ₹110',
-              icon: '🌿',
+              icon: Leaf,
               filter: 'keerai',
             },
-          ].map((cat, i) => (
-            <Link
-              key={i}
-              to={`/menu?q=${cat.filter}`}
-              className="p-5 rounded-2xl bg-white dark:bg-[#121F19] border border-slate-200/80 dark:border-emerald-900/40 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-3xl">{cat.icon}</span>
-                <span className="text-[11px] font-black text-[#14452F] dark:text-[#F2B705] bg-emerald-50 dark:bg-emerald-950/80 px-2 py-0.5 rounded-full">
-                  {cat.badge}
-                </span>
-              </div>
-              <h3 className="font-black text-base text-slate-900 dark:text-white group-hover:text-[#14452F] dark:group-hover:text-[#F2B705] transition-colors">
-                {cat.title}
-              </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                {cat.desc}
-              </p>
-            </Link>
-          ))}
+          ].map((cat, i) => {
+            const Icon = cat.icon;
+            return (
+              <Link
+                key={i}
+                to={`/menu?q=${cat.filter}`}
+                className="p-5 rounded-2xl bg-white dark:bg-[#121F19] border border-slate-200/80 dark:border-emerald-900/40 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/80 text-[#14452F] dark:text-[#F2B705] flex items-center justify-center">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <span className="text-[11px] font-black text-[#14452F] dark:text-[#F2B705] bg-emerald-50 dark:bg-emerald-950/80 px-2 py-0.5 rounded-full">
+                    {cat.badge}
+                  </span>
+                </div>
+                <h3 className="font-black text-base text-slate-900 dark:text-white group-hover:text-[#14452F] dark:group-hover:text-[#F2B705] transition-colors">
+                  {cat.title}
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                  {cat.desc}
+                </p>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
@@ -200,36 +210,36 @@ export default function Home() {
         <div className="space-y-2 text-center md:text-left z-10">
           <div className="inline-flex items-center gap-1.5 bg-black/20 text-white text-xs font-black px-3 py-1 rounded-full backdrop-blur-sm">
             <Zap className="w-3.5 h-3.5 fill-current" />
-            <span>SPECIAL OFFER FOR TODAY</span>
+            <span>VALUE SAVER ON FRESH PACKETS</span>
           </div>
           <h3 className="text-2xl sm:text-3xl font-black tracking-tight">
             Use code <span className="underline decoration-wavy decoration-white">VMASNEW</span> at Checkout
           </h3>
           <p className="text-sm sm:text-base text-amber-100 font-medium">
-            Get instant ₹30 discount on orders above ₹250 • Hot insulated delivery directly to your door!
+            Get instant ₹30 discount on orders above ₹250 • Fresh sealed packets delivered to your doorstep!
           </p>
         </div>
         <Link
           to="/menu"
           className="z-10 whitespace-nowrap bg-white hover:bg-slate-100 text-[#14452F] font-black text-sm px-6 py-3.5 rounded-2xl shadow-lg transition-transform hover:scale-105"
         >
-          Order Fresh Packs
+          Order Fresh Packets
         </Link>
         <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-white/10 skew-x-12 pointer-events-none" />
       </section>
 
-      {/* Popular Bestseller Food Packs Section */}
+      {/* Popular Bestseller Food Packets Section */}
       <section className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             <span className="text-xs font-black uppercase tracking-widest text-[#14452F] dark:text-[#F2B705]">
-              Customer Favorites
+              Family Favorites
             </span>
             <h2 className="text-3xl font-black text-slate-900 dark:text-white mt-1">
-              Popular Ready-Made Food Packs
+              Top Ready-Made Food Packets
             </h2>
             <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-              Cooked fresh on order in standard family packs of 10 to 15 pieces.
+              Hygienically sealed in standard family packs of 10, 12, and 15 pieces.
             </p>
           </div>
 
@@ -237,7 +247,7 @@ export default function Home() {
             to="/menu"
             className="inline-flex items-center gap-2 text-sm font-black text-[#14452F] dark:text-[#F2B705] hover:underline"
           >
-            <span>Browse Full Menu</span>
+            <span>View All 10 Packets</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -272,17 +282,80 @@ export default function Home() {
         )}
       </section>
 
-      {/* How it Works / The VMAS Advantage */}
+      {/* How it Works: 3 Steps for Ready-to-Cook Packs */}
       <section className="space-y-10 py-6">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <span className="text-xs font-black uppercase tracking-widest text-[#14452F] dark:text-[#F2B705]">
-            Hygienic • Wholesome • Reliable
+            Simple & Easy
           </span>
           <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">
-            Why Families Love VMAS
+            How VMAS Packets Work
           </h2>
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            We preserve traditional tawa cooking while eliminating dinner preparation stress.
+            Enjoy homemade hot rotis with zero dough-kneading effort.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {[
+            {
+              step: '01',
+              icon: ShoppingBag,
+              title: 'Order Fresh Packets',
+              desc: 'Choose your favorite 10, 12, or 15-piece packets of Chapathi, Parotta, Naan, or Poori online.',
+            },
+            {
+              step: '02',
+              icon: Bike,
+              title: 'Hygienic Home Delivery',
+              desc: 'Delivered in food-grade sealed pouches preserving natural softness, texture, and moisture.',
+            },
+            {
+              step: '03',
+              icon: Flame,
+              title: 'Toast / Fry at Home in 1 Min',
+              desc: 'Place on your hot tawa with a drop of ghee or oil, roast for 1 minute, and serve steaming hot!',
+            },
+          ].map((item, idx) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={idx}
+                className="p-7 rounded-3xl bg-white dark:bg-[#121F19] border border-slate-200/80 dark:border-emerald-900/40 shadow-sm flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/70 text-[#14452F] dark:text-[#F2B705] flex items-center justify-center shadow-inner">
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <span className="text-3xl font-black text-slate-200 dark:text-emerald-900/40">
+                      {item.step}
+                    </span>
+                  </div>
+                  <h3 className="font-extrabold text-lg text-slate-900 dark:text-white mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* The VMAS Advantage Feature Grid */}
+      <section className="space-y-10 py-6">
+        <div className="text-center max-w-2xl mx-auto space-y-2">
+          <span className="text-xs font-black uppercase tracking-widest text-[#14452F] dark:text-[#F2B705]">
+            100% Homemade Quality
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">
+            Why Buy VMAS Packets?
+          </h2>
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            The taste of authentic home cooking, without the heavy kitchen prep work.
           </p>
         </div>
 
@@ -290,26 +363,26 @@ export default function Home() {
           {[
             {
               icon: ChefHat,
-              title: 'Live Tawa Cooking',
-              desc: 'Never frozen or re-heated. Every single roti is cooked freshly on order by expert masters.',
-              badge: 'Authentic Taste',
+              title: 'Zero Kneading Mess',
+              desc: 'No dough mixing, no flour dust on counters. Open the packet and cook immediately on your tawa.',
+              badge: 'Saves 45 Mins',
             },
             {
               icon: ShieldCheck,
               title: '100% Wholesome Grains',
-              desc: 'Finest quality whole wheat, finger millet (ragi), pearl millet (bajra), and authentic herbs.',
+              desc: 'Prepared with high-protein whole wheat, pure finger millet (ragi), bajra, and medicinal herbal leaves.',
               badge: 'Zero Chemicals',
             },
             {
-              icon: Bike,
-              title: 'Thermal Insulation Pack',
-              desc: 'Packed hot in multi-layer food-grade insulated packs to retain temperature and moisture.',
-              badge: 'Steaming Hot',
+              icon: Flame,
+              title: 'Puffs Hot & Fluffy',
+              desc: 'Layered and rolled to puff up golden, soft, and fragrant on your own pan within 60 seconds.',
+              badge: 'Hot at Home',
             },
             {
               icon: Award,
-              title: 'Economical Family Sizes',
-              desc: 'Convenient 10, 12, and 15-piece packs priced fairly for families and dinner gatherings.',
+              title: 'Affordable Family Packs',
+              desc: 'Available in 10, 12, and 15-piece family sizes — perfect budget meal solution for dinner.',
               badge: 'Best Value',
             },
           ].map((item, idx) => {
@@ -341,36 +414,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Real Customer Feedback Reviews */}
+      {/* Customer Feedback Reviews */}
       <section className="space-y-8 rounded-3xl bg-slate-50 dark:bg-[#0E1B15] p-8 sm:p-12 border border-slate-200/80 dark:border-emerald-900/40">
         <div className="text-center max-w-xl mx-auto space-y-2">
           <span className="text-xs font-black uppercase tracking-widest text-[#14452F] dark:text-[#F2B705]">
-            Customer Testimonials
+            Customer Reviews
           </span>
           <h2 className="text-3xl font-black text-slate-900 dark:text-white">
-            Loved by Hundreds of Homes
+            Loved by Regular Families
           </h2>
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            See what our regular customers say about our hot food packs.
+            See how VMAS ready-made packets make dinner effortless at home.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
-              quote: 'VMAS has completely changed our dinner routine! The chapathis are so soft, just like my mom makes at home. Saves us an hour every evening.',
+              quote: 'VMAS packets are a lifesaver for busy weeknights! We just open the chapathi packet, roast them on our tawa for 1 minute, and serve hot to kids. Super soft!',
               author: 'Priya K.',
-              role: 'Working Professional, Chennai',
+              role: 'Working Mother, Chennai',
               stars: 5,
             },
             {
-              quote: 'The wheat parotta is super layered and crispy, and not oily at all. Their Mudakathan keerai chapathi is fantastic for health. Highly recommended!',
+              quote: 'The wheat parotta packets puff up so nicely with multi-layers on our home pan. Not greasy like hotel parottas, very healthy and satisfying.',
               author: 'Anand Ramachandran',
               role: 'Fitness Enthusiast',
               stars: 5,
             },
             {
-              quote: 'Ordered 3 packs of Plain Naan and Chola Poori for our family weekend get-together. They arrived hot in 35 mins. Everyone was amazed!',
+              quote: 'Ordered 3 packets of Plain Naan and Chola Poori for our weekend family gathering. We fried the pooris hot at home in minutes. Everyone loved the taste!',
               author: 'Deepika S.',
               role: 'Homemaker',
               stars: 5,

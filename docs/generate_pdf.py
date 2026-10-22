@@ -234,7 +234,7 @@ def generate_pdf():
     story.append(cover_table)
 
     story.append(Spacer(1, 140))
-    story.append(Paragraph("<i>Hot rotis at your door, ready to eat. Sold exclusively as family-friendly packs.</i>", body_style))
+    story.append(Paragraph("<i>Fresh ready-made bread packets at your door. Just toast on tawa & eat hot at home.</i>", body_style))
     story.append(PageBreak())
 
     # ==========================================
@@ -242,15 +242,15 @@ def generate_pdf():
     # ==========================================
     story.append(Paragraph("1. Project Overview", h1_style))
     story.append(Paragraph(
-        "<b>VMAS (VMA Services)</b> is an on-demand food delivery platform inspired by modern ordering apps (Swiggy/Zomato), "
-        "designed specifically for freshly made, ready-to-eat bread packs rather than full restaurant meals. "
+        "<b>VMAS (VMA Services)</b> is an online food packets delivery platform inspired by modern ordering apps (Swiggy/Zomato), "
+        "designed specifically for freshly sealed, ready-to-cook bread packets rather than cooked restaurant meals. "
         "VMAS sells wholesome staple and specialty breads (Chapathi, Wheat Parotta, Plain Naan, Poori, Bajra Chapathi, Chola Poori, Maida Parotta, Mudakathan Keerai Chapathi, Methi Chapathi, and Ragi Chapathi) "
         "packaged exclusively in multi-piece family portions (Pack of 10, Pack of 12, and Pack of 15).",
         body_style
     ))
     story.append(Paragraph(
-        "<b>Core Value Proposition:</b> Customers eliminate tedious dough kneading, rolling, and cooking. "
-        "Breads are prepared fresh upon order placement and rushed hot to customer doorsteps.",
+        "<b>Core Value Proposition:</b> Customers eliminate tedious dough kneading, rolling, and flour mess. "
+        "Fresh ready-made packets are delivered to customer doorsteps — ready to toast or fry on hot home tawas in 1 minute and enjoy hot with family.",
         body_style
     ))
     story.append(Spacer(1, 8))

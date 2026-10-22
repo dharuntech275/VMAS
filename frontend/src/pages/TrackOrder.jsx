@@ -118,10 +118,10 @@ export default function TrackOrder() {
           <span>REAL-TIME STATUS UPDATE</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">
-          Track Your Hot Order
+          Track Your Food Packet Order
         </h1>
         <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-          Monitor your freshly prepared food packs from our kitchen tawas to your door.
+          Monitor your fresh ready-to-cook bread packets from our packing center to your door.
         </p>
       </div>
 
@@ -285,7 +285,7 @@ export default function TrackOrder() {
                   {order.status === 'DELIVERED' ? 'Successfully Delivered!' : '25 - 35 Minutes'}
                 </h4>
                 <p className="text-xs text-emerald-800/80 dark:text-emerald-300/80 mt-0.5">
-                  Multi-layer thermal insulated packaging keeps your breads hot.
+                  Hygienically sealed food-grade packaging preserves fresh softness. Ready to toast on tawa!
                 </p>
               </div>
             </div>

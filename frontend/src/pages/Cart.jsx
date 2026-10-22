@@ -69,7 +69,7 @@ export default function Cart() {
             </span>
           </div>
           <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Steaming hot food packs, prepared fresh upon your order confirmation.
+            Fresh ready-to-cook food packets. Simply roast or fry on your home tawa in 1 minute!
           </p>
         </div>
 
@@ -171,7 +171,7 @@ export default function Cart() {
             <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 flex items-center gap-3">
               <ShieldCheck className="w-6 h-6 text-[#14452F] dark:text-[#F2B705] flex-shrink-0" />
               <div className="text-xs leading-relaxed text-emerald-900 dark:text-emerald-200 font-medium">
-                <strong>VMAS Hot Seal Guarantee:</strong> Food packs are packed into food-grade insulated thermal pouches directly off the tawa to arrive steaming warm.
+                <strong>VMAS Freshness Seal Guarantee:</strong> Food packets are hygienically packed into food-grade sealed pouches to preserve authentic softness and moisture. Simply toast or fry on your home tawa!
               </div>
             </div>
           </div>

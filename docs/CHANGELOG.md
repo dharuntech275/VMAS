@@ -401,3 +401,36 @@ Step-by-step implementation log detailing every milestone, file created/modified
   python docs/generate_pdf.py
   git push origin main
   ```
+
+---
+
+## Step 18: Realigned Brand Messaging to Ready-to-Cook Food Packets & Cleaned Icon Rendering
+* **Date:** 2026-10-22
+* **Summary:** Realigned brand copy and platform messaging across the entire application to accurately communicate the VMAS core business model: delivering fresh, hygienically sealed **ready-to-cook / ready-made food packets** (chapathis, parottas, naans, and pooris) that customers toast or fry on their home tawa in 1 minute, rather than prepared restaurant meals:
+  - **Footer:** Replaced all restaurant/cooking copy with ready-to-cook messaging ("Fresh ready-to-cook food packets... heat on your home tawa in 1 minute!"). Replaced unicode emojis (`🌾`, `🥞`, `🫓`, `🌿`, `📍`) with crisp Lucide SVG icons (`Wheat`, `Layers`, `CircleDot`, `Leaf`, `Compass`, `Flame`) completely resolving broken box glyphs (`▯`) across all browsers.
+  - **Navbar:** Updated branding subtitle to *"Ready-to-Cook • Heat & Eat at Home"* and status pill to *"Fresh Packets Delivered in 30-45 mins • Toast & Eat at Home"*.
+  - **Home Page:** Revamped hero headline to *"Fresh ready-made packets, toast & eat at home"*, updated the 3-step process to *1. Order Fresh Packets*, *2. Hygienic Home Delivery*, *3. Toast/Fry at Home in 1 Min*. Replaced all emoji category icons with Lucide SVG icons.
+  - **Menu & Cards:** Updated catalog title to *"Ready-Made Food Packets"* with badge *"Ready to Cook • 1 Min Tawa Toast"*.
+  - **Cart, Checkout & Tracking:** Realigned seals and notices from hot delivery to *"VMAS Freshness Seal Guarantee"* for preserving raw dough softness and freshness.
+  - **Database & Seeder:** Updated `seed_menu.py` with home-toasting descriptions for all 10 items and synchronized the database.
+  - **Documentation:** Updated PDF documentation overview and regenerated `VMAS_Documentation.pdf`.
+* **Files Created / Modified:**
+  - `vmas/frontend/src/components/Footer.jsx`
+  - `vmas/frontend/src/components/Navbar.jsx`
+  - `vmas/frontend/src/components/MenuCard.jsx`
+  - `vmas/frontend/src/pages/Home.jsx`
+  - `vmas/frontend/src/pages/Menu.jsx`
+  - `vmas/frontend/src/pages/Cart.jsx`
+  - `vmas/frontend/src/pages/Checkout.jsx`
+  - `vmas/frontend/src/pages/TrackOrder.jsx`
+  - `vmas/backend/menu/management/commands/seed_menu.py`
+  - `vmas/docs/generate_pdf.py`
+  - `vmas/docs/CHANGELOG.md`
+  - `vmas/docs/VMAS_Documentation.pdf`
+* **Run Commands:**
+  ```cmd
+  python backend/manage.py seed_menu
+  npm run build
+  python docs/generate_pdf.py
+  git push origin main
+  ```

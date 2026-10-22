@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingBag, Sun, Moon, Menu as MenuIcon, X, UtensilsCrossed, Zap, Sparkles } from 'lucide-react';
+import { ShoppingBag, Sun, Moon, Menu as MenuIcon, X, UtensilsCrossed, Zap, Flame } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useTheme } from '../context/ThemeContext';
 
@@ -12,7 +12,7 @@ export default function Navbar() {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Menu', path: '/menu' },
+    { name: 'Menu Packets', path: '/menu' },
     { name: 'Track Order', path: '/track' },
   ];
 
@@ -38,11 +38,11 @@ export default function Navbar() {
                   VMAS
                 </span>
                 <span className="bg-[#F2B705]/20 text-[#F2B705] text-[10px] font-black px-1.5 py-0.5 rounded-md border border-[#F2B705]/30">
-                  FOOD PACKS
+                  FOOD PACKETS
                 </span>
               </div>
               <span className="text-[11px] font-semibold tracking-wider uppercase text-emerald-200/90 -mt-0.5">
-                Fresh • Hot • Ready to Eat
+                Ready-to-Cook • Heat & Eat at Home
               </span>
             </div>
           </Link>
@@ -53,8 +53,8 @@ export default function Navbar() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
             </span>
-            <Zap className="w-3.5 h-3.5 text-[#F2B705]" />
-            <span>Hot Delivery in <strong className="text-[#F2B705]">30-45 mins</strong> to your Doorstep</span>
+            <Flame className="w-3.5 h-3.5 text-[#F2B705]" />
+            <span>Fresh Packets Delivered in <strong className="text-[#F2B705]">30-45 mins</strong> • Toast & Eat at Home</span>
           </div>
 
           {/* Desktop Navigation Links */}
@@ -133,8 +133,8 @@ export default function Navbar() {
             </Link>
           ))}
           <div className="pt-2 border-t border-[#1D5E40]/80 flex items-center gap-2 text-xs text-emerald-200">
-            <Zap className="w-4 h-4 text-[#F2B705]" />
-            <span>Hot Delivery in 30-45 mins • 100% Whole Wheat</span>
+            <Flame className="w-4 h-4 text-[#F2B705]" />
+            <span>Ready-to-Cook Packets • Just Toast & Eat at Home</span>
           </div>
         </div>
       )}

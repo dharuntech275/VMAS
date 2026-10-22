@@ -173,7 +173,7 @@ export default function Checkout() {
           </span>
         </div>
         <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-          Enter your location details to receive hot food packs freshly cooked from our kitchen.
+          Enter your location details to receive fresh ready-to-cook food packets delivered to your home.
         </p>
       </div>
 
@@ -464,7 +464,7 @@ export default function Checkout() {
           <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 text-xs text-emerald-900 dark:text-emerald-200 flex items-start gap-3">
             <ShieldCheck className="w-5 h-5 flex-shrink-0 text-emerald-700 dark:text-emerald-400" />
             <span>
-              <strong>Guaranteed Hot Delivery:</strong> Food is sealed into thermal pouches immediately upon cooking to maintain high temperature and crispness.
+              <strong>Guaranteed Fresh Delivery:</strong> Food packets are hygienically sealed into food-grade pouches to preserve quality, softness, and taste. Simply toast or fry on your home tawa!
             </span>
           </div>
         </div>

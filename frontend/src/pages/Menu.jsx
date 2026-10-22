@@ -6,10 +6,13 @@ import {
   RefreshCw,
   Search,
   ArrowRight,
-  Filter,
   SlidersHorizontal,
   Sparkles,
-  Zap,
+  Flame,
+  Wheat,
+  Layers,
+  CircleDot,
+  Leaf,
 } from 'lucide-react';
 import api from '../api/client';
 import MenuCard from '../components/MenuCard';
@@ -17,7 +20,7 @@ import { useCart } from '../context/CartContext';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
 export default function Menu() {
-  useDocumentTitle('Fresh Food Packs Menu');
+  useDocumentTitle('Ready-to-Cook Food Packets - VMAS');
   const [searchParams, setSearchParams] = useSearchParams();
   const initialQuery = searchParams.get('q') || '';
 
@@ -49,27 +52,25 @@ export default function Menu() {
     fetchMenu();
   }, []);
 
-  // Update searchTerm if query param changes
   useEffect(() => {
     if (searchParams.get('q')) {
       setSearchTerm(searchParams.get('q'));
     }
   }, [searchParams]);
 
-  // Categories definition
+  // Categories definition with clean Lucide SVG icons (no broken emojis)
   const categories = [
-    { id: 'ALL', label: 'All Packs', icon: '🍽️' },
-    { id: 'ROTI', label: 'Chapathi & Rotis', icon: '🌾' },
-    { id: 'PAROTTA', label: 'Layered Parottas', icon: '🥞' },
-    { id: 'POORI_NAAN', label: 'Naan & Pooris', icon: '🫓' },
-    { id: 'HERBAL', label: 'Herbal & Millets', icon: '🌿' },
+    { id: 'ALL', label: 'All Packets', icon: ShoppingBag },
+    { id: 'ROTI', label: 'Chapathi & Rotis', icon: Wheat },
+    { id: 'PAROTTA', label: 'Layered Parottas', icon: Layers },
+    { id: 'POORI_NAAN', label: 'Naan & Pooris', icon: CircleDot },
+    { id: 'HERBAL', label: 'Herbal & Millets', icon: Leaf },
   ];
 
   // Filter & Sort Logic
   const processedItems = useMemo(() => {
     let result = [...menuItems];
 
-    // 1. Text Search Filter
     if (searchTerm.trim()) {
       const q = searchTerm.toLowerCase();
       result = result.filter(
@@ -80,7 +81,6 @@ export default function Menu() {
       );
     }
 
-    // 2. Category Filter
     if (selectedCategory !== 'ALL') {
       result = result.filter((item) => {
         const name = item.name.toLowerCase();
@@ -105,7 +105,6 @@ export default function Menu() {
       });
     }
 
-    // 3. Sorting
     if (sortBy === 'PRICE_LOW') {
       result.sort((a, b) => Number(a.price) - Number(b.price));
     } else if (sortBy === 'PRICE_HIGH') {
@@ -127,14 +126,14 @@ export default function Menu() {
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-slate-200 dark:border-emerald-900/50 pb-6">
         <div>
           <div className="inline-flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-black px-3 py-1 rounded-full mb-1">
-            <Sparkles className="w-3.5 h-3.5 text-[#F2B705]" />
-            <span>100% PURE VEGETARIAN • FRESH TAWA COOKED</span>
+            <Flame className="w-3.5 h-3.5 text-[#F2B705]" />
+            <span>READY-TO-COOK PACKETS • TOAST ON TAWA AT HOME</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">
-            Our Menu Catalog
+            Ready-Made Food Packets
           </h1>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Sold exclusively in family-friendly packs of 10, 12, and 15 pieces.
+            Hygienically sealed packets of 10, 12, and 15 pieces. Order packets, roast on your home tawa, and eat hot!
           </p>
         </div>
 
@@ -162,12 +161,13 @@ export default function Menu() {
         </div>
       </div>
 
-      {/* Category Pills & Sort Controls */}
+      {/* Category Pills & Sort Controls (Pure SVG icons) */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
         {/* Category Filter Pills */}
         <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
           {categories.map((cat) => {
             const isSelected = selectedCategory === cat.id;
+            const Icon = cat.icon;
             return (
               <button
                 key={cat.id}
@@ -178,7 +178,7 @@ export default function Menu() {
                     : 'bg-white dark:bg-[#121F19] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-emerald-900/50 hover:bg-slate-50 dark:hover:bg-emerald-950/40'
                 }`}
               >
-                <span>{cat.icon}</span>
+                <Icon className="w-4 h-4" />
                 <span>{cat.label}</span>
               </button>
             );
@@ -203,7 +203,7 @@ export default function Menu() {
 
       {/* Item Counter / Filter Status */}
       <div className="flex items-center justify-between text-xs font-semibold text-slate-500 dark:text-slate-400 px-1">
-        <span>Showing {processedItems.length} wholesome food packs</span>
+        <span>Showing {processedItems.length} ready-made bread packets</span>
         {searchTerm && (
           <span className="text-[#14452F] dark:text-[#F2B705]">
             Filtered by: "{searchTerm}"
@@ -228,7 +228,7 @@ export default function Menu() {
         <div className="p-8 rounded-3xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 text-center space-y-4 max-w-md mx-auto">
           <AlertCircle className="w-10 h-10 text-amber-600 dark:text-amber-400 mx-auto" />
           <h3 className="text-lg font-bold text-amber-900 dark:text-amber-200">
-            Couldn't load menu
+            Couldn't load food packets
           </h3>
           <p className="text-xs text-amber-700 dark:text-amber-300">{error}</p>
           <button
@@ -249,7 +249,7 @@ export default function Menu() {
               <span className="text-4xl block">🔍</span>
               <div>
                 <p className="text-lg font-black text-slate-900 dark:text-white">
-                  No food packs match your filter
+                  No packets match your filter
                 </p>
                 <p className="text-xs text-slate-400 mt-1">
                   Try searching for Chapathi, Parotta, Naan, or Poori
@@ -290,7 +290,7 @@ export default function Menu() {
               <div>
                 <div className="flex items-center gap-1.5">
                   <span className="text-xs text-emerald-200 font-bold uppercase tracking-wider">
-                    {totalItems} {totalItems === 1 ? 'Pack' : 'Packs'} in Cart
+                    {totalItems} {totalItems === 1 ? 'Packet' : 'Packets'} in Cart
                   </span>
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-ping" />
                 </div>

@@ -63,7 +63,7 @@ export default function MenuCard({ item }) {
           {/* Bottom Left Badge: Freshness guarantee tag */}
           <div className="absolute bottom-2.5 left-3 flex items-center gap-1 text-[11px] font-bold text-emerald-200 drop-shadow-sm">
             <Flame className="w-3.5 h-3.5 text-[#F2B705]" />
-            <span>Cooked Fresh on Order</span>
+            <span>Ready to Cook • 1 Min Tawa Toast</span>
           </div>
         </div>
 
@@ -91,7 +91,7 @@ export default function MenuCard({ item }) {
           </div>
 
           <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-            {item.description || 'Authentically rolled and roasted on traditional tawas. Packaged hot in insulated family packs.'}
+            {item.description || 'Hygienically sealed ready-to-cook bread packet. Simply roast on your hot tawa or fry at home in 1 minute.'}
           </p>
         </div>
       </div>
